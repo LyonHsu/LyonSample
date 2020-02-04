@@ -1,4 +1,4 @@
-package lyon.calculator.lyoncalculator
+package lyon.stock.floatview.kotlin
 
 import org.junit.Test
 

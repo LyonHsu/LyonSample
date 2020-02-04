@@ -1,4 +1,4 @@
-package lyon.calculator.lyoncalculator
+package lyon.stock.floatview.kotlin
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("lyon.calculator.lyoncalculator", appContext.packageName)
+        assertEquals("lyon.stock.floatview.kotlin", appContext.packageName)
     }
 }
