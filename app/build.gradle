@@ -14,11 +14,41 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [isDeBug: false]
+    }
+    signingConfigs {
+        keyConfig {
+
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+           // signingConfig signingConfigs.keyConfig
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [isDeBug: false]
+        }
+        debug {
+            //signingConfig signingConfigs.keyConfig
+            minifyEnabled false
+            debuggable true
+            manifestPlaceholders = [isDeBug: true]
+        }
+    }
+    flavorDimensions "lyonstock"
+    productFlavors {
+        staging {
+            applicationId 'lyon.sample.kotlin.staging'
+        }
+        production {
+            applicationId 'lyon.sample.kotlin'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "app-${variant.name}_${variant.versionName}_${variant.versionCode}_Lyon.apk"
         }
     }
 }

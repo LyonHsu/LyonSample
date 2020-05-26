@@ -14,4 +14,6 @@
     <string name="file">檔案</string>
     <string name="create_new">開啟新檔</string>
     <string name="open">打開</string>
+    <string name="addNew">新增</string>
+    <string name="contactMe">聯絡我</string>
 </resources>

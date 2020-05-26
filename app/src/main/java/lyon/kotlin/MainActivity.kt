@@ -2,6 +2,9 @@ package lyon.kotlin
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,9 +17,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val TAG = "MainActivity";
     lateinit var context:Context
+    val mainFragment: MainFragment = MainFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
@@ -39,6 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        init()
     }
 
     override fun onBackPressed() {
@@ -66,6 +73,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 true
             }
+            R.id.action_add->{
+                AlertDialog.Builder(context).setTitle(context.getString(R.string.addNew)).setMessage(context.getString(R.string.addNew)).setCancelable(true).create().show()
+
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -78,11 +90,49 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_about_me -> {
-                AlertDialog.Builder(context).setTitle(context.getString(R.string.menu_aboutMe)).setMessage(context.getString(R.string.about_Me_sub)).setCancelable(true).create().show()
+               var alert =  AlertDialog.Builder(context)
+                alert.setTitle(context.getString(R.string.menu_aboutMe)).setMessage(context.getString(R.string.about_Me_sub)).setCancelable(true)
+                alert.setPositiveButton(getString(R.string.contactMe),object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        shareEmail("lejiteyu@gmail.com","Android App "+getString(R.string.app_name)+"ver:"+ Tool().getVersionName(context)+"("+Tool().getVersionCode(context)+")","hello")
+                    }
+                })
+                alert.create()
+                alert.show()
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    fun init(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_layout, mainFragment)
+        transaction.commit()
+    }
+
+    fun shareEmail(
+        to_email_id: String,
+        subject: String?,
+        body: String?
+    ) {
+        // This function will open the email client installed in the device to share from your own app through intent.
+        val sharingIntent = Intent(Intent.ACTION_SEND, Uri.parse(""))
+        sharingIntent.type = "message/rfc822"
+
+        /* All the below fields are optional. If not given simply opens the email client */
+        // To email id
+        sharingIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(to_email_id))
+        // Subject that needs to appear while sharing
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        // Body of the mail content shared.
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, body)
+        startActivity(
+            Intent.createChooser(sharingIntent, "Share content through email")
+        )
+    } // shareEmail
+
 }
+
+
