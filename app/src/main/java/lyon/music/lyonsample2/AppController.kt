@@ -1,24 +1,31 @@
-package lyon.kotlin
+package lyon.music.lyonsample2
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
-import java.util.*
 
 
 var DeBug:Boolean=false
 class AppController : Application(){
-    val TAG="AppController"
+    val TAG = this::class.java.simpleName
     var appController: AppController = this
-
+    lateinit var appLifecycleListener: AppLifecycleListener
+    lateinit var activityLifecycleCallbacks:ActivityLifecycleCallbacks
+    var nowActivity: Activity? = null
     override fun onCreate() {
         super.onCreate()
         this.appController = this
-
         val DeBug = getAppMetaDataBoolean(appController, "isDeBug", false)
         setLDeBug(DeBug)
+        activityLifecycleCallbacks =  object: ActivityLifeCycleCallback() {
+            override fun onNowActivity(activity: Activity) {
+                nowActivity = activity;
+            }
 
+        }
+        registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
         Log.e(TAG,"onCreate isDeBug:"+DeBug)
     }
 
@@ -26,6 +33,11 @@ class AppController : Application(){
     fun getInstance(): AppController? {
         return this.appController
     }
+
+    fun getNowActivity(function: () -> Unit): Activity? {
+        return nowActivity
+    }
+
 
     private fun getAppMetaDataBoolean(
         context: Context,
@@ -41,13 +53,12 @@ class AppController : Application(){
                 print("isDeBug meta-data         $metaName = $value")
             return value
         } catch (e: Exception) {
-            Log.e(TAG,"isDeBug:"+Tool().FormatStackTrace(e))
+            Log.e(TAG,"isDeBug:"+Tool.FormatStackTrace(e))
             return defaultValue
         }
     }
 
     fun getLDeBug(): Boolean {
-//        Log.e(TAG,"getLDeBug isDeBug:"+DeBug)
         return  DeBug as Boolean
     }
 
@@ -55,3 +66,5 @@ class AppController : Application(){
         DeBug=dsBug
     }
 }
+
+

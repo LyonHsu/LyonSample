@@ -1,4 +1,4 @@
-package lyon.stock.floatview.kotlin
+package lyon.music.lyonsample2
 
 import org.junit.Test
 

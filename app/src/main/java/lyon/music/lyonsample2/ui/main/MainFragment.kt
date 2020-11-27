@@ -1,10 +1,11 @@
-package lyon.kotlin
+package lyon.music.lyonsample2.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import lyon.music.lyonsample2.R
 
 /**
  * https://www.hangge.com/blog/cache/detail_2294.html

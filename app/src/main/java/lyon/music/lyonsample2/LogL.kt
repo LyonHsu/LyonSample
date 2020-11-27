@@ -1,8 +1,8 @@
-package lyon.kotlin
+package lyon.music.lyonsample2
 
 import android.util.Log
 
-open class LogUtile {
+object LogL {
     fun e(TAG :String, msg:String){
         if(AppController().getLDeBug())
             Log.e(TAG, msg)

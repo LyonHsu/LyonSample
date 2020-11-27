@@ -1,8 +1,10 @@
-package lyon.kotlin
+package lyon.music.lyonsample2
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.util.Log
 import java.io.IOException
 import java.io.PrintWriter
@@ -10,7 +12,7 @@ import java.io.StringWriter
 import java.io.Writer
 
 
-class Tool{
+object Tool{
     val TAG= Tool::class.toString()
 
     fun getVersionCode(context:Context):Int{
@@ -128,4 +130,26 @@ class Tool{
         var x =f.split("%")
         return x
     }
+
+    fun shareEmail(
+        context: Context,
+        to_email_id: String,
+        subject: String?,
+        body: String?
+    ) {
+        // This function will open the email client installed in the device to share from your own app through intent.
+        val sharingIntent = Intent(Intent.ACTION_SEND, Uri.parse(""))
+        sharingIntent.type = "message/rfc822"
+
+        /* All the below fields are optional. If not given simply opens the email client */
+        // To email id
+        sharingIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(to_email_id))
+        // Subject that needs to appear while sharing
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        // Body of the mail content shared.
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, body)
+        context.startActivity(
+            Intent.createChooser(sharingIntent, "Share content through email")
+        )
+    } // shareEmail
 }
