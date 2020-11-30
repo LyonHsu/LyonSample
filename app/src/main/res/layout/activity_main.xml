@@ -6,19 +6,47 @@
     tools:context="lyon.music.lyonsample2.ui.main.MainActivity"
     >
     <data>
-
+        <import type="lyon.music.lyonsample2.ui.main.MainVieModel"/>
+        <variable
+            name="mainVieModel"
+            type="MainVieModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
-
-        <include
-            layout="@layout/app_bar_main"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:background="@drawable/side_nav_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            >
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/title_toolbar_color"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            </com.google.android.material.appbar.AppBarLayout>
+            <include layout="@layout/content_main"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@color/colorMenubg"
+                android:visibility="visible"
+                android:onClick="@{mainVieModel.floatingButtonCLick}"
+                app:srcCompat="@android:drawable/ic_input_add"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
         <!--若要改為選單從右邊滑出，就把NavigationView屬性android:layout_gravity="start"改為android:layout_gravity="end"，選單將出現在右邊-->
         <com.google.android.material.navigation.NavigationView

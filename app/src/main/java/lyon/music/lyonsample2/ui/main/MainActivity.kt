@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import lyon.music.lyonsample2.BaseActivity
+import lyon.music.lyonsample2.Object.CountModel
 import lyon.music.lyonsample2.R
 import lyon.music.lyonsample2.databinding.ActivityMainBinding
 
@@ -23,12 +24,12 @@ import lyon.music.lyonsample2.databinding.ActivityMainBinding
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     val TAG = this::class.java.simpleName
     lateinit var context:Context
-    val mainFragment: MainFragment =
-        MainFragment()
+    lateinit var mActivityMainBinding: ActivityMainBinding //當定義好 <Layout></Layout> 標籤後根據佈局檔名稱產生
+    lateinit var mainFragment: MainFragment
+    lateinit var mainViewModel:MainVieModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
-
         init()
     }
 
@@ -77,11 +78,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    //當定義好 <Layout></Layout> 標籤後根據佈局檔名稱產生
-    var mActivityMainBinding: ActivityMainBinding? = null
     fun init(){
         //DataBinding 的 setContentView() 方式，省略原本的 setContentView(R.layout.activity_main);
         mActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        val countModel =CountModel()
+        mainViewModel= MainVieModel(countModel)
+        mainFragment = MainFragment(mainViewModel)
+        mActivityMainBinding.mainVieModel = mainViewModel
+
 
         titleColor= R.drawable.side_nav_bar;
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -104,10 +108,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         transaction.replace(R.id.main_layout, mainFragment)
         transaction.commit()
     }
-    fun floatingButtonCLick(view: View) {
-        Snackbar.make(view, "你點擊了float按鈕！！", Snackbar.LENGTH_LONG)
-            .setAction("動作", null).show()
-    }
+
 
 
 }
