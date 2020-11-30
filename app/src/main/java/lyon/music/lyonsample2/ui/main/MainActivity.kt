@@ -5,15 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import lyon.music.lyonsample2.BaseActivity
 import lyon.music.lyonsample2.R
+import lyon.music.lyonsample2.databinding.ActivityMainBinding
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -73,18 +77,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
+    //當定義好 <Layout></Layout> 標籤後根據佈局檔名稱產生
+    var mActivityMainBinding: ActivityMainBinding? = null
     fun init(){
+        //DataBinding 的 setContentView() 方式，省略原本的 setContentView(R.layout.activity_main);
+        mActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
-        setContentView(R.layout.activity_main)
         titleColor= R.drawable.side_nav_bar;
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -102,7 +104,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         transaction.replace(R.id.main_layout, mainFragment)
         transaction.commit()
     }
-
+    fun floatingButtonCLick(view: View) {
+        Snackbar.make(view, "你點擊了float按鈕！！", Snackbar.LENGTH_LONG)
+            .setAction("動作", null).show()
+    }
 
 
 }
