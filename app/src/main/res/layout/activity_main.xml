@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="lyon.music.lyonsample2.ui.main.MainActivity"
     >
@@ -16,36 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <!-- 在主佈局文件中由bind 將相應的變量傳遞給 include 佈局，從而使兩個佈局文件之間共享同一個變量-->
+        <include
+            layout="@layout/app_bar_main"
             android:background="@drawable/side_nav_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@drawable/title_toolbar_color"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
-            </com.google.android.material.appbar.AppBarLayout>
-            <include layout="@layout/content_main"/>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:background="@color/colorMenubg"
-                android:visibility="visible"
-                android:onClick="@{mainVieModel.floatingButtonCLick}"
-                app:srcCompat="@android:drawable/ic_input_add"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            bind:mainVieModel="@{mainVieModel}"
+            />
 
 
         <!--若要改為選單從右邊滑出，就把NavigationView屬性android:layout_gravity="start"改為android:layout_gravity="end"，選單將出現在右邊-->
