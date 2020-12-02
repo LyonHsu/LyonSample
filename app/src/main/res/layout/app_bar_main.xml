@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
-        <import type="lyon.music.lyonsample2.ui.main.MainVieModel"/>
+        <import type="lyon.music.lyonsample2.ui.main.MainViewModel"/>
 
         <variable
             name="mainVieModel"
-            type="MainVieModel" />
+            type="MainViewModel" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -41,7 +41,7 @@
             android:layout_margin="@dimen/fab_margin"
             android:background="@color/colorMenubg"
             android:visibility="visible"
-            android:onClick="@{mainVieModel.floatingButtonCLick}"
+            android:onClick="@{mainVieModel.floatingBtnModel.floatingButtonCLick}"
             app:srcCompat="@android:drawable/ic_input_add"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

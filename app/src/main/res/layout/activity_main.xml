@@ -7,10 +7,10 @@
     tools:context="lyon.music.lyonsample2.ui.main.MainActivity"
     >
     <data>
-        <import type="lyon.music.lyonsample2.ui.main.MainVieModel"/>
+        <import type="lyon.music.lyonsample2.ui.main.MainViewModel"/>
         <variable
-            name="mainVieModel"
-            type="MainVieModel" />
+            name="mainViewModel"
+            type="MainViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -23,7 +23,7 @@
             android:background="@drawable/side_nav_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            bind:mainVieModel="@{mainVieModel}"
+            bind:mainVieModel="@{mainViewModel}"
             />
 
 

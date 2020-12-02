@@ -7,11 +7,11 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "lyon.music.lyonsample2"
-        minSdkVersion 21
+        applicationId "lyon.sample.lyonsample2"
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [isDeBug: false]
@@ -45,7 +45,7 @@ android {
             manifestPlaceholders = [isDeBug: true]
         }
     }
-    flavorDimensions "lyon.music.lyonsample2"
+    flavorDimensions "lyon.sample.lyonsample2"
     productFlavors {
         staging {
             signingConfig signingConfigs.keyConfig

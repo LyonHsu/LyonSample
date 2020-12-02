@@ -5,18 +5,14 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import lyon.music.lyonsample2.BaseActivity
-import lyon.music.lyonsample2.Object.CountModel
+import lyon.music.lyonsample2.ui.main.Model.CountModel
 import lyon.music.lyonsample2.R
 import lyon.music.lyonsample2.databinding.ActivityMainBinding
 
@@ -26,7 +22,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     lateinit var context:Context
     lateinit var mActivityMainBinding: ActivityMainBinding //當定義好 <Layout></Layout> 標籤後根據佈局檔名稱產生
     lateinit var mainFragment: MainFragment
-    lateinit var mainViewModel:MainVieModel
+    lateinit var mainViewModel:MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
@@ -72,7 +68,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        LyonNavigation(context, item)
+        LyonNavigation(item)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -81,10 +77,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun init(){
         //DataBinding 的 setContentView() 方式，省略原本的 setContentView(R.layout.activity_main);
         mActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        val countModel =CountModel()
-        mainViewModel= MainVieModel(countModel)
+        val countModel = CountModel()
+        mainViewModel= MainViewModel(countModel)
         mainFragment = MainFragment(mainViewModel)
-        mActivityMainBinding.mainVieModel = mainViewModel
+        mActivityMainBinding.mainViewModel = mainViewModel
 
 
         titleColor= R.drawable.side_nav_bar;

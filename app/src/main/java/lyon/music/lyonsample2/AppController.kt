@@ -34,7 +34,7 @@ class AppController : Application(){
         return this.appController
     }
 
-    fun getNowActivity(function: () -> Unit): Activity? {
+    fun getNowActivity(): Context? {
         return nowActivity
     }
 

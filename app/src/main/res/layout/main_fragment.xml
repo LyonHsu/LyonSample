@@ -6,11 +6,11 @@
     >
 
     <data>
-        <import type="lyon.music.lyonsample2.ui.main.MainVieModel"/>
+        <import type="lyon.music.lyonsample2.ui.main.MainViewModel"/>
 
         <variable
             name="mainViewModel"
-            type="MainVieModel" />
+            type="MainViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="@{String.valueOf(mainViewModel.count)}"
+            android:text="@{String.valueOf(mainViewModel.countModel.count)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
