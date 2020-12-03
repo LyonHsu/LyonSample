@@ -12,7 +12,9 @@ class FloatingBtnModel(var mainVieModel: MainViewModel) {
         var countModel = mainVieModel.countModel
         LogL.d(TAG,"20201130 countModel count :"+countModel.count)
         countModel.count++
-        mainVieModel.count = ObservableInt(countModel.count)
-        mainVieModel.notifyChange()
+        mainVieModel.countObject?.set(countModel.count)
+        //val id =mainVieModel.textViewId
+        //mainVieModel.notifyPropertyChanged(id!!.get())
+        //mainVieModel.notifyChange()
     }
 }

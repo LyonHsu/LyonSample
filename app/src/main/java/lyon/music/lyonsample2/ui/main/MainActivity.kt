@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         mainViewModel= MainViewModel(countModel)
         mainFragment = MainFragment(mainViewModel)
         mActivityMainBinding.mainViewModel = mainViewModel
-
+        mActivityMainBinding.lifecycleOwner = this
 
         titleColor= R.drawable.side_nav_bar;
         val toolbar: Toolbar = findViewById(R.id.toolbar)

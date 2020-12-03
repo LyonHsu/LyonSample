@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +21,7 @@ import org.json.JSONArray
 /**
  * https://www.hangge.com/blog/cache/detail_2294.html
  */
-class MainFragment(var mainVieModel:MainViewModel) : Fragment() {
+class MainFragment(var mainViewModel:MainViewModel) : Fragment() {
     val TAG = "MainFragment"
 
     lateinit var viewDataBinding:MainFragmentBinding
@@ -31,8 +33,9 @@ class MainFragment(var mainVieModel:MainViewModel) : Fragment() {
         viewDataBinding = DataBindingUtil.inflate(
             inflater, R.layout.main_fragment, container, false
         )
-
-        viewDataBinding.mainViewModel = mainVieModel
+        val textview = viewDataBinding.root.findViewById<TextView>(R.id.count_text)
+        mainViewModel.textViewId =  ObservableInt(textview.id)
+        viewDataBinding.mainViewModel = mainViewModel
         var view = viewDataBinding.root
         return view
     }
