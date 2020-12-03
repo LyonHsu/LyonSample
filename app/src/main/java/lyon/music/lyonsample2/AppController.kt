@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
+import kotlin.properties.Delegates
 
 
 var DeBug:Boolean=false
@@ -16,6 +17,7 @@ class AppController : Application(){
     var nowActivity: Activity? = null
     override fun onCreate() {
         super.onCreate()
+        instance = this
         this.appController = this
         val DeBug = getAppMetaDataBoolean(appController, "isDeBug", false)
         setLDeBug(DeBug)
@@ -27,6 +29,11 @@ class AppController : Application(){
         }
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
         Log.e(TAG,"onCreate isDeBug:"+DeBug)
+    }
+
+    companion object {
+        private var instance : AppController by Delegates.notNull();
+        fun instance() = instance;
     }
 
     @Synchronized

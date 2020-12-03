@@ -10,7 +10,7 @@ import lyon.music.lyonsample2.Tool
 
 fun LyonNavigation( item: MenuItem) {
     // Handle navigation view item clicks here.
-    var context = AppController().getNowActivity()
+    var context = AppController.instance().getNowActivity()
     when (item.itemId) {
         R.id.nav_float_view -> {
 
