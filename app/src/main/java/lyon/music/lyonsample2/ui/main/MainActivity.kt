@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import lyon.music.lyonsample2.BaseActivity
 import lyon.music.lyonsample2.ui.main.Model.CountModel
@@ -77,11 +79,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun init(){
         //DataBinding 的 setContentView() 方式，省略原本的 setContentView(R.layout.activity_main);
         mActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        val countModel = CountModel()
-        mainViewModel= MainViewModel(countModel)
+
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java] //livedata 建立viewmodel
         mainFragment = MainFragment(mainViewModel)
         mActivityMainBinding.mainViewModel = mainViewModel
-        mActivityMainBinding.lifecycleOwner = this
+        mActivityMainBinding.lifecycleOwner = this //加這一段就可以讓model有變就更新回UI
 
         titleColor= R.drawable.side_nav_bar;
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -98,7 +100,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_layout, mainFragment)

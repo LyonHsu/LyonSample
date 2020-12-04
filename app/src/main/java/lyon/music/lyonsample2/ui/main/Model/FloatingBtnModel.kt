@@ -8,13 +8,10 @@ import lyon.music.lyonsample2.ui.main.MainViewModel
 
 class FloatingBtnModel(var mainVieModel: MainViewModel) {
     val TAG = this::class.java.simpleName
+    var count =0;
     fun floatingButtonCLick(view: View) {
-        var countModel = mainVieModel.countModel
-        LogL.d(TAG,"20201130 countModel count :"+countModel.count)
-        countModel.count++
-        mainVieModel.countObject?.set(countModel.count)
-        //val id =mainVieModel.textViewId
-        //mainVieModel.notifyPropertyChanged(id!!.get())
-        //mainVieModel.notifyChange()
+        //var count = (mainVieModel.countObject?.value ?: 0).toInt()
+        mainVieModel.countObject?.value=count++
+        LogL.d(TAG,"20201204 countModel count :"+mainVieModel.countObject?.value)
     }
 }

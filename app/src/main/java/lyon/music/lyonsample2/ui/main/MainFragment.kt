@@ -34,8 +34,8 @@ class MainFragment(var mainViewModel:MainViewModel) : Fragment() {
             inflater, R.layout.main_fragment, container, false
         )
         val textview = viewDataBinding.root.findViewById<TextView>(R.id.count_text)
-        mainViewModel.textViewId =  ObservableInt(textview.id)
         viewDataBinding.mainViewModel = mainViewModel
+        viewDataBinding.lifecycleOwner = this //加這一段就可以讓model有變就更新回UI
         var view = viewDataBinding.root
         return view
     }
