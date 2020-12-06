@@ -23,7 +23,7 @@
             android:background="@drawable/side_nav_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            bind:mainVieModel="@{mainViewModel}"
+            bind:mainViewModel="@{mainViewModel}"
             />
 
 
